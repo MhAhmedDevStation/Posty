@@ -1,0 +1,285 @@
+/* Normal desktop :1200px. */
+@media (min-width: 1200px) and (max-width: 1500px) {
+
+
+}
+
+
+/* Normal desktop :992px. */
+@media (min-width: 992px) and (max-width: 1200px) {
+    .single-hero-area {
+        padding: 110px 0 300px 0;
+    }
+    .header-top-area ul li {
+        margin-right: 12px;
+    }
+    .hero-content h4 {
+        font-size: 16px;
+    }
+    .hero-content h1 {
+        font-size: 60px;
+    }
+    .single-hero-features {
+        padding: 20px;
+    }
+    .about-text h3 {
+        font-size: 24px;
+    }
+    .section-title h2 {
+        font-size: 30px;
+    }
+    .single-job h3 {
+        font-size: 24px;
+    }
+    .dr-sm-img {
+        left: 15px;
+    }
+    .course-title a {
+        font-size: 18px;
+    }
+    .boxed-content h2 {
+        font-size: 19px;
+        margin-bottom: 20px;
+    }
+    .text-event {
+        padding-right: 0;
+    }
+    .text-event h3 {
+        font-size: 30px;
+    }
+    .t-btn {
+        background-color: var(--tp-theme-2);
+        padding: 15px 18px;
+    }
+    .footer-widget-title {
+        font-size: 24px;
+    }
+    .f-post-cont {
+        padding-right: 0;
+    }
+    .footer-widget .f-post li .f-post-cont a, .footer-widget .f-cont li {
+        font-size: 13px;
+    }
+    .about-1-text {
+        max-width: 400px;
+    }
+    .course-widget-plan{
+        overflow: hidden;
+    }
+    .course-widget-plan li {
+        float: left;
+        width: 33%;
+    }
+    .single-event-3 {
+        flex-direction: column;
+    }
+    .event-img-3 {
+        padding-right: 0;
+        width: 100%;
+    }
+    .event-content-3 {
+        width: 100%;
+        padding: 30px;
+    }
+}
+
+ 
+/* Tablet desktop :768px. */
+@media (min-width: 768px) and (max-width: 991px), (max-width: 767px) {
+    .header-area {
+        padding: 5px 15px;
+    }
+    .single-hero-area {
+        padding: 100px 0 150px 0;
+    }
+    .single-hero-features {
+        margin-bottom: 20px;
+    }
+    .hero-content h4 {
+        font-size: 16px;
+    }
+    .hero-content h1 {
+        font-size: 30px;
+        line-height: 30px;
+        margin-bottom: 14px;
+    }
+    .article-img img {
+        width: 100%;
+    }
+
+    .hero-content {
+        padding-right: 0;
+        margin-bottom: 430px;
+    }
+    .hero-features {
+        bottom: 80px;
+    }
+    .section-title h2 {
+        font-size: 30px;
+    }
+    .job-ct-2 {
+        left: 0;
+    }
+    .course-title a {
+        font-size: 20px;
+    }
+    .video-overlay {
+        width: 100%;
+    }
+    .single-video-box i {
+        position: relative;
+    }
+    .single-video-box {
+        padding-right: 0;
+        padding-left: 0;
+    }
+    .features-video-box.text-center {
+        margin-top: 32px;
+    }
+    .boxed-content {
+        padding-left: 15px;
+        padding-right: 0px;
+    }
+    .boxed-content h2 {
+        font-size: 17px;
+        margin-bottom: 8px;
+    }
+    .absolute-bg-left .boxed-content {
+        margin-left: 15px;
+    }
+    .text-event {
+        padding-right: 0;
+    }
+    .text-event h3 {
+        font-size: 19px;
+    }
+    .date-event {
+        padding: 30px;
+    }
+    .event-content {
+        width: 100%;
+    }
+    .date-event h3 {
+        font-size: 40px;
+        margin: 0;
+    }
+    .pricing-wrap {
+        display: grid;
+        grid-template-columns: 1fr;
+    }
+    .choose-course-input input,
+     .choose-course-input select,
+     .choose-course-input input[type='submit'],
+     .choose-course-input .nice-select {
+        width: 100%;
+        margin-bottom: 10px;
+    }
+    .home-3 {
+        padding: 100px 0 100px 0;
+    }
+    .home-3 .hero-content {
+        margin-bottom: 0;
+    }
+    .solution-text {
+        padding-left: 0;
+    }
+    .single-event-3 {
+        flex-direction: column;
+    }
+    .event-img-3 {
+        padding-right: 0;
+        width: 100%;
+    }
+    .event-content-3 {
+        width: 100%;
+        padding: 30px;
+    }
+    .post-conment ul li:nth-child(2) {
+        padding-left: 0;
+    }
+
+}
+
+ 
+/* small mobile :320px. */
+@media (max-width: 767px) {
+    .hero-btn .t-btn {
+        margin-bottom: 15px;
+    }
+    .section-title h2 {
+        font-size: 23px;
+    }
+    .about-text h3 {
+        font-size: 24px;
+    }
+    .single-job {
+        padding-right: 0;
+    }
+    .hero-content {
+        margin-bottom: 450px;
+    }
+    .hero-content {
+    margin-bottom: 450px;
+    }
+    .about-us {
+        padding: 50px 0;
+    }
+    .job-part {
+        padding: 50px 0;
+    }
+    .single-job h3 {
+        font-size: 19px;
+    }
+    .drem-job {
+        padding-left: 0;
+    }
+    .job-ct-3 {
+        bottom: 0;
+    }
+    .section-absolute-bg {
+        width: 100%;
+    }
+    .section-absolute-bg:before {
+        display: none;
+    }
+    .boxed-content:before {
+        display: none;
+    }
+    .choose-course-input input, .choose-course-input .nice-select {
+        margin-right: 0;
+    }
+
+
+}
+ 
+/* Large Mobile :480px. */
+@media only screen and (min-width: 480px) and (max-width: 767px) {
+
+
+/* .drem-job {
+    padding-left: 0;
+    padding-bottom: 0;
+}
+.dr-sm-img {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    left: 0;
+    bottom: 0;
+}
+.job-item {
+    margin-bottom: 30px;
+    position: relative;
+    left: 0;
+}
+.job-ct-3 {
+    bottom: 0;
+}
+.job-ct-2.job-item .job-ct-icon {
+    position: relative;
+    left: 0;
+    top: 0;
+} */
+
+ 
+}

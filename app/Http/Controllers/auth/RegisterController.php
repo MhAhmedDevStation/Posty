@@ -22,7 +22,8 @@ class RegisterController extends Controller
         // validations
 
         $this->validate($req, [
-            'name' => 'required|max:255',
+            'firstname' => 'required|max:255',
+            'lastname' => 'required|max:255',
             'username' => 'required|max:255',
             'email' => 'required|email|max:255',
             'password' => 'required|confirmed',
@@ -30,7 +31,8 @@ class RegisterController extends Controller
 
         // store user
         User::create([
-            'name' => $req->name,
+            'lastname' => $req->lastname,
+            'firstname' => $req->firstname,
             'username' => $req->username,
             'email' => $req->email,
             'password' => Hash::make($req->password),
