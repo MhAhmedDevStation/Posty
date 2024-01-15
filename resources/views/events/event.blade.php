@@ -56,24 +56,33 @@
                             data-wow-delay=".3s"
                         >
                             <div class="event-img event-img-3">
-                                <img src="{{ env('APP_STORAGE') }}{{ optional(json_decode($event->image))->path }}" alt="{{ $event->title }}">
+                                <img
+                                    src="{{ env('APP_STORAGE') }}{{ optional(json_decode($event->image))->path }}"
+                                    alt="{{ $event->title }}"
+                                >
                                 {{-- C:\xampp\htdocs\posty\storage\app\images\NVYwjhgw7yFpvUib7utrRPTw0W8qwXDHMlyJ2gTB.jpg --}}
                             </div>
                             <div class="event-content-2 event-content-3">
                                 <h2><a href="#">{{ $event->title }}</a></h2>
                                 <ul>
-                                    
-                                    <li><i class="fa-solid fa-person"></i><a>By: {{ optional($event->user)->firstname }} {{ optional($event->user)->lastname }}</a>
+
+                                    <li><i class="fa-solid fa-person"></i><a>By: {{ optional($event->user)->firstname }}
+                                            {{ optional($event->user)->lastname }}</a>
                                     <li><i class="fa-solid fa-map-location"></i><a href="#">{{ $event->location }}</a>
                                     </li>
                                     <li><i class="far fa-calendar-alt"></i>{{ $event->start_date->format('F j, Y') }}</li>
                                 </ul>
                                 <p>{{ $event->description }}</p>
                                 <div class="event-3-btn">
-                                    <a
-                                        href="#"
-                                        class="t-btn"
-                                    >Book Now</a>
+                                    <form action="{{ route('events.destroy', $event) }}" method="post">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button
+                                            type="submit"
+                                            class="d-btn"
+                                        >Delete</button>
+                                    </form>                                  
+
                                     <a
                                         href="#"
                                         class="event-3-t-btn"

@@ -43,4 +43,6 @@ Route::post('/register', [RegisterController::class, 'store']);
 
 Route::get('/events', [EventController::class,   'index'])->name('events');
 Route::post('/events', [EventController::class,   'store']);
+Route::delete('/events/{event}', [EventController::class, 'destroy'])->name('events.destroy');
+
 

@@ -53,6 +53,7 @@
   --tp-heading: #000e29;
   --tp-theme-1: #051b46;
   --tp-theme-2: #fcaf3d;
+  --tp-theme-3: #fc633d;
   --tp-text-white: #fff;
   --tp-gray-bg: #fbfbfb;
   --tp-gray-bg-2: #eee;
@@ -246,7 +247,25 @@ label {
   border-top: 1px solid #f2f2f2;
 }
 /* button style */
+.d-btn {
+  background-color: var(--tp-theme-3);
+  color: var(--tp-theme-1);
+  display: inline-block;
+  padding: 15px 30px;
+  font-weight: 600;
+  text-transform: uppercase;
+  border-radius: 5px;
+  -webkit-transition: 0.4s;
+  -o-transition: 0.4s;
+  transition: 0.4s;
+  border: 1px solid var(--tp-theme-3);
+}
 
+.d-btn:hover {
+  background: var(--tp-theme-1);
+  color: var(--tp-theme-3);
+  border-color: var(--tp-theme-1);
+}
 .t-btn {
   background-color: var(--tp-theme-2);
   color: var(--tp-theme-1);
