@@ -6,7 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
-
+use Illuminate\Support\Facades\Log;
 class RegisterController extends Controller
 {
     public function __construct()
@@ -30,17 +30,31 @@ class RegisterController extends Controller
         ]);
 
         // store user
-        User::create([
-            'lastname' => $req->lastname,
-            'firstname' => $req->firstname,
-            'username' => $req->username,
-            'email' => $req->email,
-            'password' => Hash::make($req->password),
-        ]);
-        // sign
-        auth()->attempt($req->only('email', 'password'));
-        //redirect
+        try {
+            // store user
+            User::create([
+                'lastname' => $req->lastname,
+                'firstname' => $req->firstname,
+                'username' => $req->username,
+                'email' => $req->email,
+                'password' => Hash::make($req->password),
+            ]);
 
-        return redirect()->route('dashboard');
+            // sign in
+            auth()->attempt($req->only('email', 'password'));
+
+            // redirect
+            return redirect()->route('dashboard');
+        } catch (\Exception $e) {
+            // Log the exception and any relevant information
+            Log::error('User registration failed', [
+                'exception_message' => $e->getMessage(),
+                'user_email' => $req->email,
+                'user_username' => $req->username,
+            ]);
+
+            // Handle the exception as needed
+            return redirect()->back()->withErrors(['error' => 'Registration failed. Please try again.']);
+        }
     }
 }

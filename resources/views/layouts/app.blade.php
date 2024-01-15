@@ -271,7 +271,7 @@
                                     @auth
                                         <li>
                                             {{-- <a href="">{{ auth()->user()->firstname }}&nbsp;{{ auth()->user()->lastname }}</a> --}}
-                                            <a href="">{{ auth()->user()->username }}</a>
+                                            <a href="/">{{ auth()->user()->username }}</a>
                                         </li>
 
                                         <li>
@@ -452,12 +452,12 @@
                                             <li><a href="teacher-details.html">Teachers Details</a></li>
                                         </ul>
                                     </li>
-                                    <li><a href="event.html">Event</a>
-                                        <ul class="submenu">
+                                    <li><a href="{{ route('events') }}">Event</a>
+                                        {{-- <ul class="submenu">
                                             <li><a href="event.html">Event 01</a></li>
                                             <li><a href="event-2.html">Event 02</a></li>
                                             <li><a href="event-3.html">Event 03</a></li>
-                                        </ul>
+                                        </ul> --}}
                                     </li>
                                     <li><a href="contact.html">Contact</a>
                                         <ul class="submenu">

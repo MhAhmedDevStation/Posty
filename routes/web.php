@@ -5,6 +5,7 @@ use App\Http\Controllers\auth\LogoutController;
 use App\Http\Controllers\auth\RegisterController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\auth\LoginController;
+use App\Http\Controllers\EventController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -22,7 +23,14 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('home');
 })->name('home');
-
+// Route::group([
+//     'prefix'     => 'account',
+//     'as'         => 'account.',
+//     'middleware' => 'auth',
+// ], function () {
+//     Route::get('overview', [AccountController::class, 'index'])
+//         ->name('overview');
+// });
 Route::post('/logout', [LogoutController::class, 'store'])->name('logout');
 
 Route::get('/login', [LoginController::class, 'index'])->name('login');
@@ -33,6 +41,6 @@ Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard
 Route::get('/register', [RegisterController::class, 'index'])->name('register');
 Route::post('/register', [RegisterController::class, 'store']);
 
-Route::get('/posts', function () {
-    return view('posts.index');
-});
+Route::get('/events', [EventController::class,   'index'])->name('events');
+Route::post('/events', [EventController::class,   'store']);
+
