@@ -7,6 +7,7 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Log;
+
 class RegisterController extends Controller
 {
     public function __construct()
@@ -17,6 +18,7 @@ class RegisterController extends Controller
     {
         return view('auth.register');
     }
+
     public function store(Request $req)
     {
         // validations
@@ -32,17 +34,16 @@ class RegisterController extends Controller
         // store user
         try {
             // store user
-            User::create([
+            $user = User::create([
                 'lastname' => $req->lastname,
                 'firstname' => $req->firstname,
                 'username' => $req->username,
                 'email' => $req->email,
                 'password' => Hash::make($req->password),
             ]);
-
+            $user->sendEmailVerificationNotification();
             // sign in
             auth()->attempt($req->only('email', 'password'));
-
             // redirect
             return redirect()->route('dashboard');
         } catch (\Exception $e) {
@@ -57,4 +58,10 @@ class RegisterController extends Controller
             return redirect()->back()->withErrors(['error' => 'Registration failed. Please try again.']);
         }
     }
+    protected function registered(Request $request, $user)
+    {
+        $user->sendEmailVerificationNotification();
+    }
+
+   
 }

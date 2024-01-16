@@ -114,16 +114,16 @@
                                 required=""
                             > --}}
                             {{-- Email --}}
-                            <label for="email">Your Email<span>**</span></label>
+                            <label for="login">Your Email<span>*OR*</span> User Name </label>
                             <input
                                 type="text"
-                                name="email"
-                                id="email"
+                                name="login"
+                                id="login"
                                 placeholder="Your email"
-                                class="@error('email') border-red-500 @enderror w-full rounded-lg border-2 bg-gray-100 p-4"
-                                value="{{ old('email') }}"
+                                class="@error('login') border-red-500 @enderror w-full rounded-lg border-2 bg-gray-100 p-4"
+                                value="{{ old('login') }}"
                             >
-                            @error('email')
+                            @error('login')
                                 <div class="mt-2 text-sm text-red-500">
                                     {{ $message }}
                                 </div>

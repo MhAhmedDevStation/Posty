@@ -101,6 +101,7 @@
         content="IE=edge"
     >
     <title>Ecuda - Education & Online Courses HTML Template</title>
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <meta
         name="description"
         content=""
