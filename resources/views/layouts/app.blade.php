@@ -460,11 +460,8 @@
                                             <li><a href="event-3.html">Event 03</a></li>
                                         </ul> --}}
                                     </li>
-                                    <li><a href="contact.html">Contact</a>
-                                        <ul class="submenu">
-                                            <li><a href="contact.html">Contact 01</a></li>
-                                            <li><a href="contact-2.html">Contact 02</a></li>
-                                        </ul>
+                                    <li><a href="{{ route('contact') }}">Contact</a>
+                                        
                                     </li>
                                 </ul>
                             </nav>

@@ -18,7 +18,32 @@ class RegisterController extends Controller
     {
         return view('auth.register');
     }
+    // public function store(Request $req)
+    // {
+    //     // validations
 
+    //     $this->validate($req, [
+    //         'firstname' => 'required|max:255',
+    //         'lastname' => 'required|max:255',
+    //         'username' => 'required|max:255',
+    //         'email' => 'required|email|max:255',
+    //         'password' => 'required|confirmed',
+    //     ]);
+
+    //     // store user
+    //     User::create([
+    //         'lastname' => $req->lastname,
+    //         'firstname' => $req->firstname,
+    //         'username' => $req->username,
+    //         'email' => $req->email,
+    //         'password' => Hash::make($req->password),
+    //     ]);
+    //     // sign
+    //     auth()->attempt($req->only('email', 'password'));
+    //     //redirect
+
+    //     return redirect()->route('dashboard');
+    // }
     public function store(Request $req)
     {
         // validations
@@ -30,7 +55,7 @@ class RegisterController extends Controller
             'email' => 'required|email|max:255',
             'password' => 'required|confirmed',
         ]);
-
+        // dd($req);
         // store user
         try {
             // store user
@@ -41,7 +66,8 @@ class RegisterController extends Controller
                 'email' => $req->email,
                 'password' => Hash::make($req->password),
             ]);
-            $user->sendEmailVerificationNotification();
+            // dd($user);
+            // $user->sendEmailVerificationNotification();
             // sign in
             auth()->attempt($req->only('email', 'password'));
             // redirect
@@ -62,6 +88,4 @@ class RegisterController extends Controller
     {
         $user->sendEmailVerificationNotification();
     }
-
-   
 }

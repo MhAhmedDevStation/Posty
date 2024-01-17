@@ -16,7 +16,7 @@
     <!-- breadcrumb-area-start -->
     <div
         class="breadcrumb-area pt-150 pb-150 theme-overlay"
-        style="background-image:url({{ asset('images/breadcrumb/breadcrumb2.jpg') }})"
+        style="background-image: url({{ asset('images/breadcrumb/breadcrumb2.jpg') }})"
     >
         <div class="container">
             <div class="row">

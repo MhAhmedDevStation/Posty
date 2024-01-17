@@ -3,6 +3,7 @@
 
 use App\Http\Controllers\auth\LogoutController;
 use App\Http\Controllers\auth\RegisterController;
+use App\Http\Controllers\ContactController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\auth\LoginController;
 use App\Http\Controllers\EventController;
@@ -45,6 +46,15 @@ Route::post('/register', [RegisterController::class, 'store']);
 Route::get('/events', [EventController::class,   'index'])->name('events');
 Route::post('/events', [EventController::class,   'store']);
 Route::delete('/events/{event}', [EventController::class, 'destroy'])->name('events.destroy');
+// Route::delete('/events/{event}', 'EventController@destroy')->name('events.destroy');
+
 Route::put('/events/{event}', [EventController::class, 'update'])->name('events.update');
 Route::get('/events/{id}', 'EventController@GetById')->name('events.getById');
 Route::put('/events/{id}', 'EventController@update')->name('events.update');
+
+
+// Show contact form
+Route::get('/contact', [ContactController::class, 'showForm'])->name('contact');
+
+// Handle form submission
+Route::post('/contact', [ContactController::class, 'submitForm']);
