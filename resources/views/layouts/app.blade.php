@@ -101,7 +101,10 @@
         content="IE=edge"
     >
     <title>Ecuda - Education & Online Courses HTML Template</title>
-    <meta name="csrf-token" content="{{ csrf_token() }}">
+    <meta
+        name="csrf-token"
+        content="{{ csrf_token() }}"
+    >
     <meta
         name="description"
         content=""
@@ -170,6 +173,13 @@
 
 <body>
     <!-- pre-loader-area-start -->
+    @php
+        // Retrieve language from session or use default
+        $lang = session('lang', config('app.locale'));
+
+        // Set the application locale
+        app()->setLocale($lang);
+    @endphp
     <div id="loading">
         <div id="loading-center">
             <div id="loading-center-absolute">
@@ -244,6 +254,7 @@
     <!-- search-box-end -->
     <!-- header-area-start -->
     <header class="header-area">
+
         <div class="header-top-area d-none d-lg-block">
             <div class="container">
                 <div class="row align-items-center">
@@ -291,6 +302,7 @@
                                                 </button>
                                             </form>
                                         </li>
+
                                     @endauth
                                     @guest
                                         <li>
@@ -299,7 +311,9 @@
                                         {{-- <li><a href="login.html">Login</a></li> --}}
                                         <li> <a href="{{ route('register') }}">Register</a></li>
                                     @endguest
-                                    {{-- <li class="info-bar"><a href="#"><i class="fa fa-bars font-24"></i></a></li> --}}
+                                    <li class="info-bar"><a href="#"><i class="fa fa-bars font-24"></i></a>
+                                    </li>
+
                                 </ul>
                             </div>
                         </div>
@@ -311,8 +325,15 @@
             <div class="close-icon">
                 <button><i class="fa-regular fa-circle-xmark"></i></button>
             </div>
-            <h2>Instructor</h2>
-            <div class="course-photo-gallery fix">
+            <h2>Languages</h2>
+            <p>{{ trans('welcome') }}</p>
+            <p>Current : {{ app()->getLocale() }}</p>
+            <ul class="submenu">
+                <li><a href="{{ route('set.language', 'fr') }}">French</a></li>
+                <li><a href="{{ route('set.language', 'en') }}">English</a></li>
+            </ul>
+
+            {{-- <div class="course-photo-gallery fix">
                 <a
                     class="img-popup-1"
                     href="{{ asset('images/instructor/single/member1.jpg') }}"
@@ -376,7 +397,7 @@
                         src="{{ asset('images/instructor/single/member9.jpg') }}"
                         alt=""
                     ></a>
-            </div>
+            </div> --}}
             <div class="extra-info-btn mt-20">
                 <a href="#"><i class="fab fa-twitter"></i></a>
                 <a href="#"><i class="fab fa-facebook-f"></i></a>
@@ -412,13 +433,16 @@
                                             <li><a href="about-2.html">About 02</a></li>
                                         </ul>
                                     </li>
+                                    <li><a href="{{ route('exams') }}">Exam List Report</a>
+
+                                    </li>
                                     <li><a href="course.html">Courses</a>
                                         <ul class="submenu">
                                             <li><a href="course.html">Course</a></li>
                                             <li><a href="singl-course.html">Course Single</a></li>
                                         </ul>
                                     </li>
-                                    <li><a href="#">Pages</a>
+                                    {{-- <li><a href="#">Pages</a>
                                         <ul class="submenu">
                                             <li><a href="gallery.html">Gallery</a>
                                                 <ul class="submenu">
@@ -439,13 +463,13 @@
                                             <li><a href="login.html">Login</a></li>
                                             <li><a href="registration.html">Register</a></li>
                                         </ul>
-                                    </li>
-                                    <li><a href="blog.html">Blog</a>
+                                    </li> --}}
+                                    {{-- <li><a href="blog.html">Blog</a>
                                         <ul class="submenu">
                                             <li><a href="blog.html">Blog</a></li>
                                             <li><a href="single-blog.html">Blog Single</a></li>
                                         </ul>
-                                    </li>
+                                    </li> --}}
                                     <li><a href="teacher.html">Teachers</a>
                                         <ul class="submenu">
                                             <li><a href="teacher.html">Teachers</a></li>
@@ -461,7 +485,7 @@
                                         </ul> --}}
                                     </li>
                                     <li><a href="{{ route('contact') }}">Contact</a>
-                                        
+
                                     </li>
                                 </ul>
                             </nav>

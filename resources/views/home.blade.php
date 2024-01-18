@@ -1,6 +1,15 @@
 @extends('layouts.app')
 
 @section('content')
+{{-- @php
+// dd(Session::get('lang'));
+use Session;
+$lang = Session::get('lang');
+$lang = App::getLocale();
+App::setLocale($lang);
+
+@endphp --}}
+
 <div class="single-hero-area" style="background-image:url({{ 'images/hero/hero1.jpg' }}">
     <div class="container">
         <div class="row align-items-center">

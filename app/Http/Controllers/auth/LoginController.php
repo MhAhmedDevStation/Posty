@@ -54,7 +54,7 @@ class LoginController extends Controller
         }
 
         if (auth::attempt($credentials)) {
-            return redirect()->route('dashboard');
+            return redirect()->route('home');
         } else {
             return back()->with('status', 'Invalid login details')->withInput();
         }

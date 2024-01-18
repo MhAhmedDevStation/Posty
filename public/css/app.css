@@ -12529,6 +12529,9 @@ video {
 .flex {
   display: flex;
 }
+.table {
+  display: table;
+}
 .w-4\/12 {
   width: 33.333333%;
 }

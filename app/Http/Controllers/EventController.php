@@ -152,4 +152,34 @@ class EventController extends Controller
         return response()->json(['message' => $event]);
     }
 
+    public function updateAndRefresh(Request $request, $id)
+    {
+        try {
+            // Find the event by ID
+            $event = Event::findOrFail($id);
+
+            // Check if a new image file is provided
+            if ($request->hasFile('image')) {
+                $imagePath = $request->file('image')->store('images', 'local');
+                // Format image information as an array
+                $imageData = [
+                    'path' => $imagePath,
+                    'name' => $request->file('image')->getClientOriginalName(),
+                    // Add any other information you want to store about the image
+                ];
+
+                // Encode the array as JSON and update the 'image' attribute of the event
+                $event->image = json_encode($imageData);
+            }
+
+            // Update the event with the remaining form data
+            $event->update($request->except('image'));
+            $event->load('user');
+
+            return redirect()->route('events.index')->with('success', 'Event updated successfully.');
+        } catch (\Exception $e) {
+            \Illuminate\Support\Facades\Log::error('Error updating event: ' . $e->getMessage());
+            return redirect()->back()->with('error', 'An error occurred while updating the event. Please try again.');
+        }
+    }
 }

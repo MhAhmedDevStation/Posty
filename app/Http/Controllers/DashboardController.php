@@ -15,13 +15,13 @@ class DashboardController extends Controller
         // dd(auth()->user());
         return view('dashboard');
     }
-    public function sendTestEmail()
-    {
-        Mail::raw('Test email content', function ($message) {
-            $message->to('anouarbader12@gmail.com');
-            $message->subject('Test Email');
-        });
+    // public function sendTestEmail()
+    // {
+    //     Mail::raw('Test email content', function ($message) {
+    //         $message->to('anouarbader12@gmail.com');
+    //         $message->subject('Test Email');
+    //     });
 
-        return 'Test email sent successfully';
-    }
+    //     return 'Test email sent successfully';
+    // }
 }

@@ -16,7 +16,7 @@
     <!-- breadcrumb-area-start -->
     <div
         class="breadcrumb-area pt-150 pb-150 theme-overlay"
-        style="background-image: url({{ asset('images/breadcrumb/breadcrumb2.jpg') }})"
+        style="background-image:url({{ asset('images/breadcrumb/breadcrumb2.jpg') }})"
     >
         <div class="container">
             <div class="row">
@@ -309,7 +309,7 @@
                             <div class="registration-inner">
 
                                 <form
-                                    action="{{ route('events') }}"
+                                    action="{{ route('events.updateAndRefresh', ['id' => ':id']) }}"
                                     method="post"
                                     enctype="multipart/form-data"
                                     id="updateEventForm"
@@ -363,7 +363,6 @@
                                         id="updateimage"
                                         class="@error('image') border-red-500 @enderror w-full rounded-lg border-2 bg-gray-100 p-4"
                                         accept="image/*"
-                                        required=""
                                     >
                                     <label for="filenameDisplay"> <span id="filenameDisplay"></span></label>
 
@@ -409,10 +408,15 @@
                                     @error('end_date')
                                         <div class="mt-2 text-sm text-red-500"> {{ $message }}</div>
                                     @enderror
-                                    <button
+                                    {{-- <button
                                         type="button"
                                         class="d-btn"
                                         onclick="updateEvent()"
+                                    >Update</button> --}}
+
+                                    <button
+                                        type="submit"
+                                        class="d-btn"
                                     >Update</button>
 
                                 </form>
@@ -440,7 +444,8 @@
             // Update this line accordingly
             // Populate the modal with event data
             populateUpdateModal(eventData);
-
+            var updateForm = $('#updateEventForm');
+            updateForm.attr('action', updateForm.attr('action').replace(':id', eventData.id));
             // Show the modal
             $('#updateEventModal').modal('show');
             $('#updateEventModal').data('event-id', eventData.id);
@@ -468,80 +473,96 @@
             return formattedDate;
         }
 
-        function updateEvent() {
-            var eventId = $('#updateEventModal').data('event-id');
-            var eventData = $('#updateEventModal').data('event-data');
-            var csrfToken = $('meta[name="csrf-token"]').attr('content');
-            var formData = new FormData($('#updateEventForm')[0]);
-            formData.append('_method', 'PUT');
-            $.ajax({
-                url: '/events/' + eventId,
-                method: 'POST', // Use POST method to handle FormData
-                data: formData,
-                processData: false, // Important: prevent jQuery from processing the data
-                contentType: false, // Important: prevent jQuery from setting contentType
-                headers: {
-                    'X-CSRF-TOKEN': csrfToken
-                },
-                success: function(response) {
-                    // Handle success
-                    $('#updateEventModal').modal('hide');
-                    console.log('response event:', response.message);
-                    const appStorage = "{{ env('APP_STORAGE') }}";
-                    var event = response.message
-                    var imageObject = event.image ? JSON.parse(event.image) : null;
-                    var imagePath = imageObject && imageObject.path ? appStorage + imageObject.path : '';
-                    var myElement = document.getElementById('event' + response.message.id);
-                    console.log('myElement :', myElement)
-                    myElement.innerHTML = `
-                    <div class="event-img event-img-3">
-                        <img src="${imagePath}" alt="${event.title}">                               
-                            </div>
-                            <div class="event-content-2 event-content-3">
-                                <h2><a href="#">${event.title}</a></h2>
-                                <ul>
-                                    <li><i class="fa-solid fa-person"></i><a>By: ${event.user.firstname} ${event.user.lastname}</a></li>                                       
-                                    <li><i class="fa-solid fa-map-location"></i><a href="#">${event.location}</a></li>                                    
-                                    <li><i class="far fa-calendar-alt"></i>${new Date(event.start_date).toLocaleDateString()}</li>
-                                </ul>
-                                <p>${event.description}</p>
-                                <div class="event-3-btn">
-                                ${isAuthenticated ? userId === event.user_id ? 
-                                    `<form action="{{ route('events.destroy', $event) }}" method="post">
-                                            @csrf
-                                            @method('DELETE')
-                                            <button type="submit" class="d-btn">Delete</button>
-                                        </form>
-                                                <button
-                                                    data-event-data='${JSON.stringify(event)}'
-                                                    type="button"
-                                                    class="d-btn update-event-btn"
-                                                    data-bs-toggle="modal"
-                                                    data-bs-target="#updateEventModal"
-                                                    onclick="showModalUpdate(${JSON.stringify(event)})">Update
-                                                </button>`
-                                    :`<form method="post">
-                                            @csrf
-                                            <button type="submit" class="t-btn">BOOOK NOW</button>
-                                        </form>`
-                                    :`<form action="{{ route('login') }}">
-                                            @csrf
-                                             <button type="submit" class="t-btn">Login to register</button>
-                                            </form>`}
-                                    <a
-                                        href="#"
-                                        class="event-3-t-btn"
-                                    ><i class="fa-solid fa-ticket-simple"></i> ${event.nb_seats} Seat Available</a>
-                                </div>
-                            </div>
-                    `
-                },
-                error: function(error) {
-                    console.error('Error updating event:', error);
-                }
-            });
+        // function updateEvent() {
+        //     var eventId = $('#updateEventModal').data('event-id');
+        //     var eventData = $('#updateEventModal').data('event-data');
+        //     var csrfToken = $('meta[name="csrf-token"]').attr('content');
+        //     var formData = new FormData($('#updateEventForm')[0]);
+        //     formData.append('_method', 'PUT');
+        //     $.ajax({
+        //         url: '/events/' + eventId,
+        //         method: 'POST', // Use POST method to handle FormData
+        //         data: formData,
+        //         processData: false, // Important: prevent jQuery from processing the data
+        //         contentType: false, // Important: prevent jQuery from setting contentType
+        //         headers: {
+        //             'X-CSRF-TOKEN': csrfToken
+        //         },
+        //         success: function(response) {
+        //             // Handle success
+        //             $('#updateEventModal').modal('hide');
+        //             console.log('response event:', response.message);
+        //             const appStorage = "{{ env('APP_STORAGE') }}";
+        //             var event = response.message
+        //             var imageObject = event.image ? JSON.parse(event.image) : null;
+        //             var imagePath = imageObject && imageObject.path ? appStorage + imageObject.path : '';
+        //             var myElement = document.getElementById('event' + response.message.id);
+        //             console.log('myElement :', myElement)
+        //             if (event) {
+        //                 // Your existing code to update the inner HTML
+        //                 myElement.innerHTML = `
+    //             <div class="event-img event-img-3">
+    //                 <img src="${imagePath}" alt="${event.title}">                               
+    //                     </div>
+    //                     <div class="event-content-2 event-content-3">
+    //                         <h2><a href="#">${event.title}</a></h2>
+    //                         <ul>
+    //                             <li><i class="fa-solid fa-person"></i><a>By: ${event.user.firstname} ${event.user.lastname}</a></li>                                       
+    //                             <li><i class="fa-solid fa-map-location"></i><a href="#">${event.location}</a></li>                                    
+    //                             <li><i class="far fa-calendar-alt"></i>${new Date(event.start_date).toLocaleDateString()}</li>
+    //                         </ul>
+    //                         <p>${event.description}</p>
+    //                         <div class="event-3-btn">
 
-            // return false; // Prevent form submission
-        }
+    //                         ${isAuthenticated ? userId === event.user_id ? 
+    //                             `<form action="${event ? `{{ route('events.destroy', ['event' => ':eventId']) }}`.replace(':eventId', event.id) : '#'}" method="post">
+        //                                     @csrf
+        //                                     @method('DELETE')
+        //                                     <button type="submit" class="d-btn">Delete</button>
+        //                             </form>
+        //                                                 <button
+        //                                                     data-event-data='${JSON.stringify(event)}'
+        //                                                     type="button"
+        //                                                     class="d-btn update-event-btn"
+        //                                                     data-bs-toggle="modal"
+        //                                                     data-bs-target="#updateEventModal"
+        //                                                     onclick="showModalUpdate(${JSON.stringify(event)})">Update
+        //                                                 </button>`
+    //                             :`<form method="post">
+        //                                             @csrf
+        //                                             <button type="submit" class="t-btn">BOOOK NOW</button>
+        //                                         </form>`
+    //                             :`<form action="{{ route('login') }}">
+        //                                             @csrf
+        //                                              <button type="submit" class="t-btn">Login to register</button>
+        //                                             </form>`}
+    //                             <a
+    //                                 href="#"
+    //                                 class="event-3-t-btn"
+    //                             ><i class="fa-solid fa-ticket-simple"></i> ${event.nb_seats} Seat Available</a>
+    //                         </div>
+    //                     </div>
+    //             `
+        //             } else {
+        //                 console.error('Invalid event data.');
+        //             }
+
+        //         },
+        //         error: function(error) {
+        //             console.error('Error updating event:', error);
+        //         }
+        //     });
+
+        //     // return false; // Prevent form submission
+        // }
+        document.getElementById('updateEventForm').addEventListener('submit', function(event) {
+            // Optionally, you can add client-side validation logic here before submitting the form
+
+            // The form will be submitted normally, and the browser will follow the specified action URL
+            // If you need to perform additional logic after the form submission, you can handle it here
+
+            // For example, close the modal after submission
+            $('#updateEventModal').modal('hide');
+        });
     </script>
 @endsection
